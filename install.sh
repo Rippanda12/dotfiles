@@ -16,7 +16,7 @@ yay -S google-chrome surfshark-vpn flameshot spotify --noconfirm && OK
 chsh -s $(which fish) && echo "Shell changed successfully ^_^"
 #grub
 sudo cp $HOME/dotfiles/etc/default/grub /etc/default/grub
-grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo "Grub config updated"
 
 
@@ -25,5 +25,6 @@ echo "Grub config updated"
 cd $HOME/dotfiles
 sudo mkdir /etc/fan2go/
 sudo cp $HOME/dotfiles/fan2go/fan2go.yaml /etc/fan2go/fan2go.yaml
+sudo systemctl enable --now fan2go
 
 sudo pacman -Syuu --noconfirm
