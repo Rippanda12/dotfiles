@@ -1,0 +1,44 @@
+#To be copyied in /etc/fan2go/fan2go.yaml
+#> w83627dhg-isa-0
+#  Fans     Index  Label   RPM   PWM  Auto
+#           1      hwmon4  1394  255  false
+#           2      hwmon4  3515  255  false
+#           3      hwmon4  969   255  false
+#  Sensors  Index  Label                 Value
+#           1      hwmon4 (temp1_input)  32000
+#           2      hwmon4 (temp2_input)  37000
+#           3      hwmon4 (temp3_input)  35500
+#
+#> amdgpu-pci-0200
+#  Fans     Index  Label   RPM  PWM  Auto
+#           1      hwmon3  -1   51   false
+#  Sensors  Index  Label               Value
+#           1      edge (temp1_input)  37000
+#
+#> k10temp-pci-0c3
+#  Sensors  Index  Label                 Value
+#           1      hwmon1 (temp1_input)  20875
+fans:
+  - id: fan4pin
+    hwmon:
+      platform: w83627dhg-isa-0
+      index: 1
+    neverStop: yes
+    curve: fan1
+sensors:
+  - id: cputemp
+    hwmon:
+      platform: k10temp-pci-0c3
+      index: 1
+curves:
+  - id: fan1
+    linear:
+      sensor: cputemp
+      steps:
+        # Sensor value -> Speed (in pwm)
+        - 20: 0
+        - 30: 40
+        - 40: 60
+        - 50: 120
+        - 67: 170
+        - 70: 255
