@@ -1,12 +1,13 @@
 #!/bin/bash
-sudo cp -v $HOME/dotfiles/etc/pacman.conf /etc/pacman.conf
-sudo cp -v $HOME/dotfiles/etc/makepkg.conf /etc/makepkg.conf
-sudo mkdir /repo
-sudo mount /dev/sdb3 /repo
 #chaotic aur
 sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
 sudo pacman-key --lsign-key FBA220DFC880C036
 sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+#repo-local-mirror
+sudo cp -v $HOME/dotfiles/etc/pacman.conf /etc/pacman.conf
+sudo cp -v $HOME/dotfiles/etc/makepkg.conf /etc/makepkg.conf
+sudo mkdir /repo
+sudo mount /dev/sdb3 /repo
 # software & dependencies
 sudo pacman -Sy
 sudo pacman -S git fish yay base-devel vulkan-devel wmname ranger vlc os-prober --noconfirm --needed && OK
